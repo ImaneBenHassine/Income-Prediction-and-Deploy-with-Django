@@ -25,31 +25,34 @@ has a user interface.
 - 3.start the Django project.
 
 Installation : 
-- Download Python : This will install Python and pip the Python package manager.
-- Add Python to the Path Variable
-- Back in the command prompt :
+- Back in the anaconda prompt :
 - pip install virtualenv or py -m venv venv ( using virtual environment to not mess with packages from other projects)
 - Before starting Django project let’s get the empty repository from the Github : 
 - git clone https://github.com/pplonski/my_ml_service.git (with .gitignore adding Python template it will prevent git from tracking unimportant or unsafe files like .env files)
 - cd my_ml_service
 - ls -l ( if it not working probably needs to add C:\Program Files\Git\usr\bin tp the path variable)
-- virtualenv env
-- env\Scripts\activate.bat ( need to activate the environment every time starting work on your project in the new terminal)
+- venv\Scripts\activate.bat ( need to activate the environment every time starting work on your project in the new terminal)
 Start Django project : 
-- py -m pip install Django (The Django is installed in version Django-3.2.9 and  add in the requirements.txt in backend directory with Django version)
-cd backend
-django-admin startproject server (if problems running django-admin try python -m django)
-cd server (The Django project name is set to server)
-pip3 install djangorestframework ( for django rest framework)
-python manage.py runserver
+- py -m pip install Django==2.2.4 
+- mkdir backend (create backend directory)
+- cd backend
+- django-admin startproject server (The Django project name is set to server)
+- cd server ( run initiated server)
+- python manage.py runserver
+- ALLOWED_HOSTS = ['127.0.0.1'] in setting.py
 
-may change in backend/server/server/apps/accounts/apps.py
-class AccountsConfig(AppConfig):
-    name = 'apps.accounts'
-class NotesConfig(AppConfig):
-    name = 'apps.notes'
- 
- pip install numpy --upgrade
- pip install joblib --upgrade
- pip install pandas --upgrade
- 
+The environment is successfully set up.
+
+Add source files to the repository by commiting new files:
+git add backend/
+git commit -am "setup django project"
+git push
+
+and those new files are adding :
+- The outer servet root directory is a container for the project.
+- backend/server/manage.py : a command-line utility that lets you interact with this Django project in various                             ways
+- the inner server/ directory is the actual python package for the project
+- backend/server/server/__init__.py : an empty file that tells Python that this directory should be considered                                       a Python package
+- backend/server/server/settings.py : settings/configuration for this Django project
+- backend/server/server/urls.py : the URL declarations for this Django project; a “table of contents” of the                                    Django-powered site
+- backend/server/server/wsgi.py : an entry-point for WSGI-compatible web servers to serve the project. 
