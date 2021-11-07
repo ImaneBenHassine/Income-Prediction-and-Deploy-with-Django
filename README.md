@@ -3,6 +3,10 @@
 ## Introduction :
 In this project I will build ML system available with REST API.  for building the ML service I will use Python 3.6 and Django 2.2.4. 
 
+### Data Source : https://archive.ics.uci.edu/ml/datasets/Adult
+### Abstarct : Predict whether income exceeds $50K/yr based on census data. Also known as "Census Income" dataset.
+
+
 
 There are many ways of how ML algorithms can be used:
 - by runing  the ML algorithm locally to compute predictions on prepared test data and share predictions with others. It is easy and fast in implementation but hard to govern, monitor, scale and collaborate.
