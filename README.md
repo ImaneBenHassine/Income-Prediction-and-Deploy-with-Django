@@ -56,3 +56,29 @@ and those new files are adding :
 - backend/server/server/settings.py : settings/configuration for this Django project
 - backend/server/server/urls.py : the URL declarations for this Django project; a “table of contents” of the                                    Django-powered site
 - backend/server/server/wsgi.py : an entry-point for WSGI-compatible web servers to serve the project. 
+
+## Buil Machine Learning algorithms
+
+There will be 3 steps in this level : 
+- setup Jupyter notebook
+- build two ML algorithms
+- save pre-processing details and algorithms.
+
+### Jupyter notebook
+pip3 install jupyter notebook
+- then set Jupyter to use local virtualenv:
+ipython kernel install --user --name=venv
+
+- create a research directory where I will put Jupiter files :
+mkdir research
+cd research
+- then start Jupyter :
+jupyter notebook
+- start a new notebook and select the correct kernel, venv in our case 
+
+### Train ML algorithms
+- install packages : pip3 install numpy pandas sklearn joblib
+- 
+The numpy and pandas packages are used for data manipulation. 
+The joblib is used for ML objects saving. 
+The sklearn package offers a wide range of ML algorithms then reload Jupyter after installation.
