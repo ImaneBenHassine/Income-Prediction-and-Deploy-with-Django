@@ -28,19 +28,28 @@ Installation :
 - Download Python : This will install Python and pip the Python package manager.
 - Add Python to the Path Variable
 - Back in the command prompt :
-- pip install virtualenv
-- set the repository : 
-- git clone https://github.com/pplonski/my_ml_service.git
+- pip install virtualenv or py -m venv venv ( using virtual environment to not mess with packages from other projects)
+- Before starting Django project let’s get the empty repository from the Github : 
+- git clone https://github.com/pplonski/my_ml_service.git (with .gitignore adding Python template it will prevent git from tracking unimportant or unsafe files like .env files)
 - cd my_ml_service
 - ls -l ( if it not working probably needs to add C:\Program Files\Git\usr\bin tp the path variable)
 - virtualenv env
 - env\Scripts\activate.bat ( need to activate the environment every time starting work on your project in the new terminal)
-- py -m pip install Django (The Django is installed in version Django-3.2.9)
 Start Django project : 
-
-py -m pip install django
+- py -m pip install Django (The Django is installed in version Django-3.2.9 and  add in the requirements.txt in backend directory with Django version)
 cd backend
-django-admin startproject server
+django-admin startproject server (if problems running django-admin try python -m django)
 cd server (The Django project name is set to server)
-python manage.py runserver
 pip3 install djangorestframework ( for django rest framework)
+python manage.py runserver
+
+may change in backend/server/server/apps/accounts/apps.py
+class AccountsConfig(AppConfig):
+    name = 'apps.accounts'
+class NotesConfig(AppConfig):
+    name = 'apps.notes'
+ 
+ pip install numpy --upgrade
+ pip install joblib --upgrade
+ pip install pandas --upgrade
+ 
