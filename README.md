@@ -1,10 +1,11 @@
 # Income Prediction and Deploy with Django
 
 ## Introduction :
-In this project I will build ML system available with REST API.  for building the ML service I will use Python 3.6 and Django 2.2.4. 
+In this project I will build ML system available with REST API using Python 3.6 and Django 2.2.4. 
 
-### Data Source : https://archive.ics.uci.edu/ml/datasets/Adult
-### Abstarct : Predict whether income exceeds $50K/yr based on census data. Also known as "Census Income" dataset.
+Data Source : https://archive.ics.uci.edu/ml/datasets/Adult
+
+Abstarct : Predict whether income exceeds $50K/yr based on census data. Also known as "Census Income" dataset.
 
 
 
@@ -61,7 +62,7 @@ and those new files are adding :
 - backend/server/server/urls.py : the URL declarations for this Django project; a “table of contents” of the                                    Django-powered site
 - backend/server/server/wsgi.py : an entry-point for WSGI-compatible web servers to serve the project. 
 
-## Buil Machine Learning algorithms
+## Build Machine Learning algorithms
 
 There will be 3 steps in this level : 
 - setup Jupyter notebook
@@ -82,7 +83,79 @@ jupyter notebook
 
 ### Train ML algorithms
 - install packages : pip3 install numpy pandas sklearn joblib
-- 
+
 The numpy and pandas packages are used for data manipulation. 
 The joblib is used for ML objects saving. 
 The sklearn package offers a wide range of ML algorithms then reload Jupyter after installation.
+
+### Add ML code and artifacts to the repository
+add our notebook and files to the repository.Each file with preprocessing objects and algorithms is smaller than 100 MB, which is the GitHub file limit
+
+git add research/*
+git commit -am "add ML code and algorithms"
+git push
+
+## Django models
+After having a default Django project initialized and having MLalgorithms trained and ready for inference, it is time to build Django models to store information about ML algo and requests in the database , then write REST API for MLalgo with Django REST Framework.
+
+### Create Django models
+- need to create new app in backend/server directory
+python manage.py startapp endpoints
+
+mkdir apps  ( add apps directory to keep project clean)
+
+mv endpoints/ apps/  (moved it to the apps directory)
+
+- In apps/endpoints/models.py file , define database models (Django provides object-relational mapping layer (ORM)) by defining:
+1. ##### Endpoint : to keep information about new apps endpoints
+2. ##### MLAlgorithm : to keep information about MLalgo used in the service
+3. ##### MLAlgorithmStatuts : to keep information about ML algo statues since the status can change in time                               it can be : testing, staging, production, ab_testing.
+4. #### MLRequest : to keep information about all requests to MLalgorithms and needed to monitor MLalgo and run A/B tests
+
+- Add app 'apps.endpoints' to INSTALLED_APPS in backend/server/server/settings.py 
+- Then run migrations to apply models to the database in backend/server directory :
+
+        python manage.py makemigrations
+        
+        python manage.py migrate
+
+This commands will create tables in the database , by default Django is using SQLiteas a database but we can set a Postgres or MySQL as a databse by a configuration in backend/server/server/settings.py
+
+### Cretae REST API for models
+After defining database models we still not seeing anything new when running the web server because we need to specify REST API to the objects by using Django REST FRAMEWORK DRF :
+- pip3 install djangorestframework
+- pip3 install markdown  (Markdown support for the browsable API)
+- pip3 install django-filter  (Filtering support)
+- and add 'rest_framework' to INSTALLED_APPS in backend/server/server/settings.py
+
+Inorder to see changes in the browser we need to define : 
+- serializers : they will define how database objects are mapped in requests,
+- views : how models are accessed in REST API,
+- urls  : definition of REST API URL addresses for models.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
