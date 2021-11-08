@@ -59,7 +59,7 @@ and those new files are adding :
 - The outer servet root directory is a container for the project.
 - backend/server/manage.py : a command-line utility that lets you interact with this Django project in various                             ways
 - the inner server/ directory is the actual python package for the project
-- backend/server/server/__init__.py : an empty file that tells Python that this directory should be considered                                       a Python package
+- backend/server/server/_init_.py : an empty file that tells Python that this directory should be considered                                       a Python package
 - backend/server/server/settings.py : settings/configuration for this Django project
 - backend/server/server/urls.py : the URL declarations for this Django project; a “table of contents” of the                                    Django-powered site
 - backend/server/server/wsgi.py : an entry-point for WSGI-compatible web servers to serve the project. 
@@ -112,10 +112,10 @@ After having a default Django project initialized and having MLalgorithms traine
           mv endpoints/ apps/  (moved it to the apps directory)
 
 - In apps/endpoints/models.py file , define database models (Django provides object-relational mapping layer (ORM)) by defining:
-1. ##### Endpoint : to keep information about new apps endpoints
-2. ##### MLAlgorithm : to keep information about MLalgo used in the service
-3. ##### MLAlgorithmStatuts : to keep information about ML algo statues since the status can change in time                               it can be : testing, staging, production, ab_testing.
-4. #### MLRequest : to keep information about all requests to MLalgorithms and needed to monitor MLalgo and run A/B tests
+1. __Endpoint__ : to keep information about new apps endpoints
+2. __MLAlgorithm__ : to keep information about MLalgo used in the service
+3. __MLAlgorithmStatuts__ : to keep information about ML algo statues since the status can change in time                               it can be : testing, staging, production, ab_testing.
+4. __MLRequest__ : to keep information about all requests to MLalgorithms and needed to monitor MLalgo and run A/B tests
 
 - Add app 'apps.endpoints' to INSTALLED_APPS in backend/server/server/settings.py 
 - Then run migrations to apply models to the database in backend/server directory :
@@ -138,9 +138,9 @@ After defining database models we still not seeing anything new when running the
 and add 'rest_framework' to INSTALLED_APPS in backend/server/server/settings.py
 
 Inorder to see changes in the browser we need to define : 
-- serializers : they will define how database objects are mapped in requests,
-- views : how models are accessed in REST API,
-- urls  : definition of REST API URL addresses for models.
+- __serializers__ : they will define how database objects are mapped in requests,
+- __views__ : how models are accessed in REST API,
+- __urls__  : definition of REST API URL addresses for models.
 
 ### DRF Serializers
 Add serializers.py file to server/apps/endpoints directory
@@ -166,7 +166,7 @@ Adding URLs to backend/server/apps/endpoints/urls.py then add it endpoints urls 
 Then REST API routers to database modles are created and accessed by URL pattern :
      http://<server-ip>/api/v1/<object-name>
 
-the v1 in the API adress needed for API versioning.
+the __v1__ in the API adress needed for API versioning.
         
 ### Run the server
 in backend/server run :
@@ -187,17 +187,64 @@ By opening http://127.0.0.1:8000/api/v1/ in the web browser a DRF view will appe
         
         git push
 
+and we will have Everything up-to-date but incase it failed to push some refs to repository try to pull before by run : git pull. And need to identify Author identity before push by typing user.name or user.email :git config --global user.name "name"
 
+## Add ML algorithms to the server code
+        
+After training two ML algo and creating Django with databse models and REST API endpoints representing ML endpoints, models and requests. It is time to 
+- create ML code in the server
+- write ML algo registry
+- add ML algo to the server
 
+## MLcode in the server
+In this section we will write code on the server-side that will use previously trained algo.
+- Create new directory ML in backend/server/apps to keep all ML related code and income_classifier directory to keep our income classifiers.
+          mkdir ml
+          mkdir ml/income_classifier
+- Create new fiels random_forest.py and empty file __init__.py and implement ML algo in random_forest.py 
 
+The __RandomForestClassifier__ algorithm has five methods:
+ 1. __init__ :the constructor which loads preprocessing objects and Random Forest object (created with Jupyter notebook)
+2. __preprocessing__ :the method which takes as input JSON data, converts it to Pandas DataFrame and apply pre-processing
+3. __predict__: the method that calls ML for computing predictions on prepared data
+4. __postprocessing__ : the method that applies post-processing on prediction values
+5. __compute_prediction__ : the method that combines: preprocessing, predict and postprocessing and returns JSON object with the response.
 
+- Add ml app to INSTALLED_APPS in backend/server/server/settings.py to enable code in the Django
 
+## ML code tests
+To check Random Forest algorithm is working as expected needs to write test case using one row from data and check if the prediction is correct.
 
+Adding two files into ml directory empty _init_.py file and tests.py and the test is for :
+  - constructing an input JSON data object
+  - initializing ML algorithm
+  - computing ML prediction and checking the prediction outcome.
+  
+Using Django tests, run in backend/server directory
+          
+           python manage.py test apps.ml.tests
+  
+## Algprithms registry
+ML code ready and tested and need to connect it with the server code by creating the ML registry object and keeping information about available algorithms and endpoints.
+  Add __registry.py__ file in the backend/server/apps/ml/ directory
 
-
-
-
-
+The registry keeps simple dict object with a mapping of algorithm id to algorithm object, and to check if the code is working as expected, we can add test case in the backend/server/apps/ml/tests.py file
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 
