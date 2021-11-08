@@ -246,12 +246,20 @@ commit a new code:
 Since we have ML algo in the database and can access information with REST API, now need to do __predictions__
  
 ## Predictions 
+ After creating Ml algo in Jupyter notebook , creating  Django app with database models and REST API and added the ML code to the server code plus create ML registry, we need to add a view to handle request in the server and forwardingthem to ML code , then add API URL to the view and write tests for predictions.
+        
+ ### Predictions View
+Create the view for predictions that can accept POST request with JSON data and forward it to the correct ML algo.
+ 
+Add code of class PredictView in backend/server/apps/endpoints/views.py.And predict url in backend/server/apps/endpoints/urls.py
+- The __PredictView__ accepts only POST requests. It is available at: https://<server_ip/>api/v1/<endpoint_name>/predict
+- The __endpoint_name__ is defining the endpoint that we are trying to reach. In local development the ML algorithm can be accessed at: http://127.0.0.1:8000/api/v1/income_classifier/predict
+- The __income_classifier__ is the endpoint name (at http://127.0.0.1:8000/api/v1/endpoints).
+Plus we can can specify algorithm status or version in the URL since by default, there is a used production status by including them in the URL, for example:
+http://127.0.0.1:8000/api/v1/income_classifier/predict?status=testing&version=1.1.1.
 
-  
-  
-  
-  
-  
+There is routing of the request to correct ML algorithm based on endpoint name, status and version. If the algorithm is selected properly, the JSON request is forwarded to the algorithm object and prediction is computed.
+
   
   
   
