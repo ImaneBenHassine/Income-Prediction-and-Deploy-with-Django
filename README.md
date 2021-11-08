@@ -93,20 +93,23 @@ The sklearn package offers a wide range of ML algorithms then reload Jupyter aft
 ### Add ML code and artifacts to the repository
 add our notebook and files to the repository.Each file with preprocessing objects and algorithms is smaller than 100 MB, which is the GitHub file limit
 
-git add research/*
-git commit -am "add ML code and algorithms"
-git push
+        git add research/*
+        
+        git commit -am "add ML code and algorithms"
+        
+        git push
 
 ## Django models
 After having a default Django project initialized and having MLalgorithms trained and ready for inference, it is time to build Django models to store information about ML algo and requests in the database , then write REST API for MLalgo with Django REST Framework.
 
 ### Create Django models
 - need to create new app in backend/server directory
-python manage.py startapp endpoints
 
-mkdir apps  ( add apps directory to keep project clean)
+          python manage.py startapp endpoints
 
-mv endpoints/ apps/  (moved it to the apps directory)
+          mkdir apps  ( add apps directory to keep project clean)
+
+          mv endpoints/ apps/  (moved it to the apps directory)
 
 - In apps/endpoints/models.py file , define database models (Django provides object-relational mapping layer (ORM)) by defining:
 1. ##### Endpoint : to keep information about new apps endpoints
@@ -170,13 +173,19 @@ in backend/server run :
         
           python manage.py runserver
 
-  by opening http://127.0.0.1:8000/api/v1/ in the web browser a DRF view will appear 
+By opening http://127.0.0.1:8000/api/v1/ in the web browser a DRF view will appear 
         
 ![DRF](https://user-images.githubusercontent.com/26963240/140718891-d5555cba-e71c-4e3c-882d-f4ff4fd0aed7.png)
+ By clicking on any URL and checking the objects we can see empty list for all objects because we didn't add anything there yet so let's add ML algorithms and endpoints .
 
-
-
-
+### Add code to repository
+ run in backend/server directory
+        
+        git add apps/endpoints
+        
+        git commit -am "endpoints models"
+        
+        git push
 
 
 
