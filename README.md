@@ -47,6 +47,8 @@ Start Django project :
 - ALLOWED_HOSTS = ['127.0.0.1'] in setting.py
 
 The environment is successfully set up.
+![django](https://user-images.githubusercontent.com/26963240/140719522-f58e707e-02a0-4344-a24d-6dae593eb0d2.png)
+
 
 Add source files to the repository by commiting new files:
 git add backend/
@@ -123,23 +125,54 @@ This commands will create tables in the database , by default Django is using SQ
 
 ### Cretae REST API for models
 After defining database models we still not seeing anything new when running the web server because we need to specify REST API to the objects by using Django REST FRAMEWORK DRF :
-- pip3 install djangorestframework
-- pip3 install markdown  (Markdown support for the browsable API)
-- pip3 install django-filter  (Filtering support)
-- and add 'rest_framework' to INSTALLED_APPS in backend/server/server/settings.py
+
+          pip3 install djangorestframework
+          
+          pip3 install markdown   (Markdown support for the browsable API)
+          
+          pip3 install django-filter  (Filtering support)
+          
+and add 'rest_framework' to INSTALLED_APPS in backend/server/server/settings.py
 
 Inorder to see changes in the browser we need to define : 
 - serializers : they will define how database objects are mapped in requests,
 - views : how models are accessed in REST API,
 - urls  : definition of REST API URL addresses for models.
 
+### DRF Serializers
+Add serializers.py file to server/apps/endpoints directory
 
+It will help packing and unpacking database objects into JSON objects. In Endpoints and MLAlgorithm serializers, we defined all read-only fields because, we will create and modify our objects only on the server-side.
 
+For MLAlgorithmStatus, fields status, created_by, created_at and parent_mlalgorithm are in read and write mode, we will use the to set algorithm status by REST API. 
 
+For MLRequest serializer there is a feedback field that is left in read and write mode - it will be needed to provide feedback about predictions to the server.
 
+The MLAlgorithmSerializer has one filed current_status that represents the latest status from MLAlgorithmStatus.
 
+### Views
+Add views code in backend/server/endpoints/views.py file 
 
+Cretaing a View for each model allow to retrieve single object or list of objects but not allow to create or modify ndpoints, MLAlgorithms by REST API and the code of new ML related objects will be on server side.
 
+Allow to create MLAlgorithmStatus object by REST API but not allow to edit statuses for MLalgo. Alow to edit MLRequest objects only feedback field
+
+### URLs
+Adding URLs to backend/server/apps/endpoints/urls.py then add it endpoints urls to main urls.py file of the server (file backend/server/server/urls.py), this is the last steps tp access out models 
+
+Then REST API routers to database modles are created and accessed by URL pattern :
+     http://<server-ip>/api/v1/<object-name>
+
+the v1 in the API adress needed for API versioning.
+        
+### Run the server
+in backend/server run :
+        
+          python manage.py runserver
+
+  by opening http://127.0.0.1:8000/api/v1/ in the web browser a DRF view will appear 
+        
+![DRF](https://user-images.githubusercontent.com/26963240/140718891-d5555cba-e71c-4e3c-882d-f4ff4fd0aed7.png)
 
 
 
