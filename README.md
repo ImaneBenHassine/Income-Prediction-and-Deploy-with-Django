@@ -196,7 +196,7 @@ After training two ML algo and creating Django with databse models and REST API 
 - write ML algo registry
 - add ML algo to the server
 
-## MLcode in the server
+### ML code in the server
 In this section we will write code on the server-side that will use previously trained algo.
 - Create new directory ML in backend/server/apps to keep all ML related code and income_classifier directory to keep our income classifiers.
           mkdir ml
@@ -212,7 +212,7 @@ The __RandomForestClassifier__ algorithm has five methods:
 
 - Add ml app to INSTALLED_APPS in backend/server/server/settings.py to enable code in the Django
 
-## ML code tests
+### ML code tests
 To check Random Forest algorithm is working as expected needs to write test case using one row from data and check if the prediction is correct.
 
 Adding two files into ml directory empty _init_.py file and tests.py and the test is for :
@@ -224,16 +224,29 @@ Using Django tests, run in backend/server directory
           
            python manage.py test apps.ml.tests
   
-## Algprithms registry
+### Algprithms registry
 ML code ready and tested and need to connect it with the server code by creating the ML registry object and keeping information about available algorithms and endpoints.
   Add __registry.py__ file in the backend/server/apps/ml/ directory
 
 The registry keeps simple dict object with a mapping of algorithm id to algorithm object, and to check if the code is working as expected, we can add test case in the backend/server/apps/ml/tests.py file
+Now needs to specify one place in the server code which will add ML algo to the registry when the server is starting in backend/server/server/wsgi.py file.
+        
+Run server to check enpoints and algorithms :
+![enpoint](https://user-images.githubusercontent.com/26963240/140739094-1aff14f0-9c37-4e16-9013-2c70ab986af2.png)
+ 
+![ml algo](https://user-images.githubusercontent.com/26963240/140739117-6cb3a9f6-2474-4288-ae6e-acb5e0183157.png)
   
-  
-  
-  
-  
+### Add code to repository
+commit a new code: 
+        git add apps/ml/
+        
+        git commit -am "add ml code"
+        
+        git push
+Since we have ML algo in the database and can access information with REST API, now need to do __predictions__
+ 
+## Predictions 
+
   
   
   
