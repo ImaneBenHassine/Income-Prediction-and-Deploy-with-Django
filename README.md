@@ -260,6 +260,11 @@ http://127.0.0.1:8000/api/v1/income_classifier/predict?status=testing&version=1.
 
 There is routing of the request to correct ML algorithm based on endpoint name, status and version. If the algorithm is selected properly, the JSON request is forwarded to the algorithm object and prediction is computed.
 
+To check if is it working please go to http://127.0.0.1:8000/api/v1/income_classifier/predict and provide example JSON input
+
+        ![predict](https://user-images.githubusercontent.com/26963240/141123449-f25e9872-d7bd-4a73-afa9-c29b91814cf2.png)
+
+
   
   
   
