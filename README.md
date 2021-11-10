@@ -343,7 +343,22 @@ and run the srever
 Let's create A/B test
 ![ab test try](https://user-images.githubusercontent.com/26963240/141135679-262735d4-46f9-4131-8b29-99e9995b42bc.png)
         
- 
+After A/B test creation an updated status fields for ML algorithms is generated .and seted to "current_status": "ab_testing"
+        
+## Run A/B test
+        
+In order to run A/B test we will write python script in the Jupyter notebook that will simulate real life A/B testing. The script will:
+
+- read test data
+- send sample by sample to the server
+- get the server response and send the feedback to the server.
+        
+need to install requests package using for communication with the server.        
+    
+        pip3 install requests
+
+        
+        
         
         
 
