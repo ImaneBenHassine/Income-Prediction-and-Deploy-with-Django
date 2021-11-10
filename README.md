@@ -262,12 +262,23 @@ There is routing of the request to correct ML algorithm based on endpoint name, 
 
 To check if is it working please go to http://127.0.0.1:8000/api/v1/income_classifier/predict and provide example JSON input
 
-        ![predict](https://user-images.githubusercontent.com/26963240/141123449-f25e9872-d7bd-4a73-afa9-c29b91814cf2.png)
+![predict](https://user-images.githubusercontent.com/26963240/141123449-f25e9872-d7bd-4a73-afa9-c29b91814cf2.png)
 
+By cliking the POST buttom the result will be the predictable class and with that the MLweb service is working correctly !
 
+![result_predict](https://user-images.githubusercontent.com/26963240/141124132-dd18157a-bd77-4be3-b39c-375f7fdea7d4.png)
+
+### Add test for PredictView
+it is a simple test case that will check if the predicted view correctly responds to correct datt in backend/server/endpoints/tests.py and run it in backend/server directory
+      python manage.py test apps.endpoints.tests
+
+Probably will need more tests to cover situations where wrong endpoints are selected in the URL or data is in the wrong format.
+
+### Add code to the repository
+before moving to A/B testing let's add code to the repository in backend/server directory
+       git commit -am "add predict view"
   
-  
-  
+       git push
   
   
  
