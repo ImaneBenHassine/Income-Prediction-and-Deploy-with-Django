@@ -339,6 +339,11 @@ and run the srever
 
  The RDF generated list of APIs       
 ![ab test](https://user-images.githubusercontent.com/26963240/141134371-ad51d2d5-bc4a-4cb5-9fa1-aa6ed920156b.png)
+
+Let's create A/B test
+![ab test try](https://user-images.githubusercontent.com/26963240/141135679-262735d4-46f9-4131-8b29-99e9995b42bc.png)
+        
+ 
         
         
 
