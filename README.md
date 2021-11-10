@@ -264,7 +264,7 @@ To check if is it working please go to http://127.0.0.1:8000/api/v1/income_class
 
 ![predict](https://user-images.githubusercontent.com/26963240/141123449-f25e9872-d7bd-4a73-afa9-c29b91814cf2.png)
 
-By cliking the POST buttom the result will be the predictable class and with that the MLweb service is working correctly !
+By clicking the POST buttom the result will be the predictable class and with that the MLweb service is working correctly !
 
 ![result_predict](https://user-images.githubusercontent.com/26963240/141124132-dd18157a-bd77-4be3-b39c-375f7fdea7d4.png)
 
@@ -276,12 +276,50 @@ Probably will need more tests to cover situations where wrong endpoints are sele
 
 ### Add code to the repository
 before moving to A/B testing let's add code to the repository in backend/server directory
+        
        git commit -am "add predict view"
   
        git push
   
-  
+## A/B testing  
  
+Now having our ML algo created , Django web service with ML code database models for endpoints algorithms and requests created and predict view the routing requests to ML algo created.
+        
+It is time to :
+- add the second ML algorithm the Extra Trees based to the web service
+- create database mosel and REST API view for A/B tests information
+- write python script for sending requests
+  
+ ## Add Extra Trees based algorithm
+add new file extra_trees.py in backend/server/apps/ml/income_classifer directory
+
+the code will be similar to RandomForestClassifier with changed path for reading the model and add new test method to MLtests class in backend/server/apps/ml/tests.py file then run the test
+      
+        python manage.py test apps.ml.tests
+the algo is working and we need to add it to our ML registry in backend/server/server/wsgi.py file      
+add :
+        from apps.ml.income_classifier.extra_trees import ExtraTreesClassifier # import ExtraTrees ML algorithm   and applay other modification     
+
+Now let see the changes and the two registred ML algorithms by running in backend/server:
+        
+        python manage.py runserver
+http://127.0.0.1:8000/api/v1/mlalgorithms
+    
+![two ML algo](https://user-images.githubusercontent.com/26963240/141130656-820e9356-8208-4184-a9f6-0f4b8266c814.png)
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
 
 
