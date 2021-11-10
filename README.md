@@ -356,8 +356,18 @@ In order to run A/B test we will write python script in the Jupyter notebook tha
 need to install requests package using for communication with the server.        
     
         pip3 install requests
-
         
+        jupyter notebook
+
+Create new script ab_test.ipynb in the research directory :
+- loading the data
+- split train test
+- creating iteration for first rows for test data for A/B test by sending data to API endpoint http://127.0.0.1:8000/api/v1/income_classifier/predict?status=ab_testing and provide feedback with true label at http://127.0.0.1:8000/api/v1/mlrequests/<request-id>
+     
+At this point I got an error o communicate between Django and Python: "requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=8000)" 
+        
+because I used the same terminal to access the python file and runserver at that time which was not running so commmunication couldn't happen. I then opened a separate terminal and run the server and now my Python file is able to communicate with Django file. Now its running fine.        
+ 
         
         
         
