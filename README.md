@@ -307,17 +307,38 @@ http://127.0.0.1:8000/api/v1/mlalgorithms
     
 ![two ML algo](https://user-images.githubusercontent.com/26963240/141130656-820e9356-8208-4184-a9f6-0f4b8266c814.png)
 
+## Create A/B model in the database
+To keep information about A/b tests we will add database model in the backend/server/apps/endpoints/models.py file
+Tha class ABTest created will keep information about :
+- 1. which ML algorithms are tested
+- 2. who and when created the test
+- 3. when test is stopped
+- 4. the test results in the summary field.
+
+## Add serializer
+add class ABTestSerializer in backend/server/apps/endpoints/serializers.py        
+the id, created_at, ended_at and summary fields are marked as read-only but the users will be able to create A/B tests with REST API the read-only fields with be set with server code.        
+## Define view         
+add class ABTestViewSet to the file backend/server/apps/endpoints/views.py       
+
+The ABTestViewSet view allows the user to create new objects. The perform_create method creates the ABTest object and two new statuses for ML algorithms. The new statuses are set to ab_testing.       
+
+And add class StopABTestView to stop the A/B test and compute the accuracy (ratio of correct responses) for each algorithm. The algorithm with higher accurcy is set as production algorithm, the other algorithm is saved with testing status.
+
+## Add URL router for ABTest
+this is the last step adding URL router in backend/server/apps/endpoints/urls.py file
+Now let's create and applay database migrations :
         
+        python manage.py makemigrations
         
+        python manage.py migrate
         
+and run the srever
         
-        
-        
-        
-        
-        
-        
-        
+        python manage.py runserver
+
+ The RDF generated list of APIs       
+![ab test](https://user-images.githubusercontent.com/26963240/141134371-ad51d2d5-bc4a-4cb5-9fa1-aa6ed920156b.png)
         
         
 
