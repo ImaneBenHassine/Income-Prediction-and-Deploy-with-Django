@@ -368,9 +368,69 @@ At this point I got an error o communicate between Django and Python: "requests.
         
 because I used the same terminal to access the python file and runserver at that time which was not running so commmunication couldn't happen. I then opened a separate terminal and run the server and now my Python file is able to communicate with Django file. Now its running fine.        
  
+A list of requests should appear after running the script in http://127.0.0.1:8000/api/v1/mlrequests
+
+Now to stop the A/B test run http://127.0.0.1:8000/api/v1/stop_ab_test/1 where is the A/B test id, after clicking Post button a summary of the test siplayed with accuracy for each algorithm and under ML algorithm list the status get updated and the model with higher accuracy is set to production.       
+
+## Add code to the repository
+        
+        git it add backend/server/apps/ml/income_classifier/extra_trees.py
+        
+        git add research/ab_test.ipynb
+        
+        git commit -am "ab tests"
+        
+        git push
+
+### Doker Containers
+Now with finishing the creation of :
+- ML algorithms
+- Django web service, with ML code, database models for endpoints, algorithms, and requests
+- Predict view, which is routing requests to ML algorithms
+- A/B testing code in the server.
+
+It is time to define docker container for the server coder, it will makes easy to deploy the code to selected infrastructure and to scale the service.
+        
+ ## Create the code 
+Starting by adding some changes in the server code in backend/server/server/settings.py     
+
+ALLOWED_HOSTS = ['0.0.0.0']        
+
+and set the STATIC_ROOT, STATIC_URL
+        
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATIC_URL = '/static/'       
+
+and set the requirements.txt file in the project's main directory
+python -m django --version
+django-admin --version
+        
+## Dockerfiles
+keep the docker files for nginx server and ther server application in seperate directories 
+  
+In project's main directory run :
+        
+        mkdir docker
+        
+        mkdir docker/nginx
+        
+        mkdir docker/backend
+        
+And add file Dockerfile in docker/nginx directory:
+        
+FROM nginx:1.13.12-alpine
+CMD ["nginx", "-g", "daemon off;"]
+
+Add nginx config file, please add docker/nginx/default.conf file
+
+Define Dockerfile for the server application in docker/backend/Dockerfile
         
         
         
-
-
-
+        
+        
+        
+        
+        
+        
