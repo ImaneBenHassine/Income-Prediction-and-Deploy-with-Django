@@ -1,13 +1,11 @@
 # Income Prediction and Deploy with Django
 
 ## Introduction :
-In this project I will build ML system available with REST API using Python 3.6 and Django 2.2.4. 
+In this project I will build ML system available with REST API using Python3 and Django
 
 Data Source : https://archive.ics.uci.edu/ml/datasets/Adult
 
 Abstarct : Predict whether income exceeds $50K/yr based on census data. Also known as "Census Income" dataset.
-
-
 
 There are many ways of how ML algorithms can be used:
 - by runing  the ML algorithm locally to compute predictions on prepared test data and share predictions with others. It is easy and fast in implementation but hard to govern, monitor, scale and collaborate.
@@ -32,9 +30,8 @@ has a user interface.
 Installation : 
 - Back in the anaconda prompt :
 - pip install virtualenv or py -m venv venv ( using virtual environment to not mess with packages from other projects)
-- Before starting Django project let’s get the empty repository from the Github : 
-- git clone https://github.com/pplonski/my_ml_service.git (with .gitignore adding Python template it will prevent git from tracking unimportant or unsafe files like .env files)
-- cd my_ml_service
+- Before starting Django project let’s get the empty repository from the Github
+- cd C:\Users\user\Income-Prediction-and-Deploy-with-Django
 - ls -l ( if it not working probably needs to add C:\Program Files\Git\usr\bin tp the path variable)
 - venv\Scripts\activate.bat ( need to activate the environment every time starting work on your project in the new terminal)
 Start Django project : 
@@ -57,11 +54,11 @@ git push
 
 and those new files are adding :
 - The outer servet root directory is a container for the project.
-- backend/server/manage.py : a command-line utility that lets you interact with this Django project in various                             ways
+- backend/server/manage.py : a command-line utility that lets you interact with this Django project in various ways
 - the inner server/ directory is the actual python package for the project
-- backend/server/server/_init_.py : an empty file that tells Python that this directory should be considered                                       a Python package
+- backend/server/server/_init_.py : an empty file that tells Python that this directory should be considered a Python package
 - backend/server/server/settings.py : settings/configuration for this Django project
-- backend/server/server/urls.py : the URL declarations for this Django project; a “table of contents” of the                                    Django-powered site
+- backend/server/server/urls.py : the URL declarations for this Django project; a “table of contents” of the Django-powered site
 - backend/server/server/wsgi.py : an entry-point for WSGI-compatible web servers to serve the project. 
 
 ## Build Machine Learning algorithms
@@ -382,52 +379,17 @@ Now to stop the A/B test run http://127.0.0.1:8000/api/v1/stop_ab_test/1 where i
         
         git push
 
-### Doker Containers
-Now with finishing the creation of :
-- ML algorithms
-- Django web service, with ML code, database models for endpoints, algorithms, and requests
-- Predict view, which is routing requests to ML algorithms
-- A/B testing code in the server.
-
-It is time to define docker container for the server coder, it will makes easy to deploy the code to selected infrastructure and to scale the service.
+### Conclusion
         
- ## Create the code 
-Starting by adding some changes in the server code in backend/server/server/settings.py     
-
-ALLOWED_HOSTS = ['0.0.0.0']        
-
-and set the STATIC_ROOT, STATIC_URL
+This web service makes Machine Learning models available with REST API.
+- 1.it keeps information about many ML models in the web service. There can be several ML models available at the same endpoint with different versions.
+- 2.it stores information about requests sent to the ML models, this can be used later for model testing and audit.
+- 3.it has tests for ML code and server code
+- 4.it can run A/B tests between different versions of ML models. 
         
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-STATIC_URL = '/static/'       
-
-and set the requirements.txt file in the project's main directory
-python -m django --version
-django-admin --version
-        
-## Dockerfiles
-keep the docker files for nginx server and ther server application in seperate directories 
-  
-In project's main directory run :
-        
-        mkdir docker
-        
-        mkdir docker/nginx
-        
-        mkdir docker/backend
-        
-And add file Dockerfile in docker/nginx directory:
-        
-FROM nginx:1.13.12-alpine
-CMD ["nginx", "-g", "daemon off;"]
-
-Add nginx config file, please add docker/nginx/default.conf file
-
-Define Dockerfile for the server application in docker/backend/Dockerfile
-        
-        
-        
+         
+Next step will be defining docker container for the server coder . Docker is a tool designed to make it easier to create, deploy, and run applications by using containers which allow a developer to package up an application with all of the parts it needs and can download all the dependencies, required for machine learning.
+ 
         
         
         
