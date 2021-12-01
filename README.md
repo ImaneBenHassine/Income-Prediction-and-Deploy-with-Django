@@ -1,7 +1,7 @@
 # Income Prediction and Deploy with Django
 
 ## Introduction :
-In this project I will build ML system available with REST API using Python3 and Django
+In this project I will build ML system available with REST API using Python and Django
 
 Data Source : https://archive.ics.uci.edu/ml/datasets/Adult
 
@@ -97,7 +97,7 @@ add our notebook and files to the repository.Each file with preprocessing object
         git push
 
 ## Django models
-After having a default Django project initialized and having MLalgorithms trained and ready for inference, it is time to build Django models to store information about ML algo and requests in the database , then write REST API for MLalgo with Django REST Framework.
+After having a default Django project initialized and having MLalgorithms trained and ready for inference, it is time to build Django models to store information about ML algo and requests in the database , then write REST API for ML algo with Django REST Framework.
 
 ### Create Django models
 - need to create new app in backend/server directory
@@ -284,7 +284,7 @@ Now having our ML algo created , Django web service with ML code database models
         
 It is time to :
 - add the second ML algorithm the Extra Trees based to the web service
-- create database mosel and REST API view for A/B tests information
+- create database model and REST API view for A/B tests information
 - write python script for sending requests
   
  ## Add Extra Trees based algorithm
